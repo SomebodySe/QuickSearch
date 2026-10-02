@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="256"
+     height="256"
+     viewBox="0 0 256 256">
+
+    <!-- 放大镜 -->
+    <circle
+        cx="105"
+        cy="105"
+        r="65"
+        fill="none"
+        stroke="black"
+        stroke-width="22"/>
+
+    <!-- 手柄 -->
+    <line
+        x1="153"
+        y1="153"
+        x2="220"
+        y2="220"
+        stroke="black"
+        stroke-width="22"
+        stroke-linecap="round"/>
+</svg>

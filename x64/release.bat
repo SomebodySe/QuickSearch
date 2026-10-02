@@ -1,0 +1,1 @@
+C:\Qt\6.8.3\msvc2022_64\bin\windeployqt.exe --release --no-translations --no-system-d3d-compiler --no-opengl-sw  "D:\cpp_proj\QuickSearch\x64\Release\QtWidgetsApplication1.exe"
