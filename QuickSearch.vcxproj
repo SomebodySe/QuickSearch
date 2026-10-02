@@ -105,6 +105,7 @@
     <QtUic Include="QuickSearch.ui" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AutoFontButton.h" />
     <ClInclude Include="config.h" />
     <ClInclude Include="searchmanager.h" />
     <QtMoc Include="targetwidget.h" />
@@ -128,6 +129,9 @@
     <ClCompile Include="QuickSearch.cpp" />
     <ClCompile Include="searchmanager.cpp" />
     <ClCompile Include="targetwidget.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="README.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

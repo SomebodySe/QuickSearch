@@ -25,6 +25,7 @@ public:
 protected:
     void resizeEvent(QResizeEvent* event) override;
     void showEvent(QShowEvent* event) override;
+    void adjustButtonFont(QPushButton* button);
 
 private:
     void createButtons();

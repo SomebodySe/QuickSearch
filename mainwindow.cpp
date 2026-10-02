@@ -43,6 +43,7 @@ MainWindow::MainWindow(QWidget* parent)
 
     m_resetButton =
         new QPushButton("复位");
+    m_resetButton->setFixedSize(48, 24);
     m_autoEnterCheckBox->setChecked(false);
 
     m_targetFrame = new QFrame;
@@ -167,7 +168,8 @@ void MainWindow::createButtons()
 
         QPushButton* button =
             new QPushButton(text, this);
-
+        button->setFixedSize(80, 30);
+        adjustButtonFont(button);
         m_buttons.append(button);
 
         // 左键点击
@@ -292,11 +294,33 @@ void MainWindow::editButtonText(QPushButton* button)
             button->text(),
             &ok);
 
-    if (ok)
+    if (!ok)
+        return;
+
+    // 修改按钮文字
+    button->setText(text);
+
+    // 修改后立即重新计算字体
+    adjustButtonFont(button);
+
+    // 找到这个按钮在 m_buttons 中的位置
+    int index = m_buttons.indexOf(button);
+
+    if (index >= 0)
     {
-        button->setText(text);
-        saveConfig();
+        // 确保 m_buttonTexts 数量足够
+        while (m_buttonTexts.size() <= index)
+        {
+            m_buttonTexts.append(
+                QString::number(
+                    m_buttonTexts.size() + 1));
+        }
+
+        // 同步保存到文字列表
+        m_buttonTexts[index] = text;
     }
+
+    saveConfig();
 }
 
 void MainWindow::saveConfig()
@@ -447,4 +471,38 @@ void MainWindow::showEvent(QShowEvent* event)
     {
         resetTargetPosition();
     }
+}
+
+void MainWindow::adjustButtonFont(QPushButton* button)
+{
+    if (!button)
+        return;
+
+    QFont font = button->font();
+
+    // 正常情况下的字体大小
+    const int normalSize = 14;
+
+    // 最小字体大小
+    const int minSize = 6;
+
+    // 按钮固定 80x30，所以留一点左右空间
+    const int availableWidth = 80 - 10;
+
+    font.setPointSize(normalSize);
+
+    while (font.pointSize() > minSize)
+    {
+        QFontMetrics metrics(font);
+
+        if (metrics.horizontalAdvance(button->text())
+            <= availableWidth)
+        {
+            break;
+        }
+
+        font.setPointSize(font.pointSize() - 1);
+    }
+
+    button->setFont(font);
 }
